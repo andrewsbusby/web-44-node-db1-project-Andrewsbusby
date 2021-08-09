@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const md = require('./accounts-middleware');
 
 router.get('/', (req, res, next) => {
   try {
