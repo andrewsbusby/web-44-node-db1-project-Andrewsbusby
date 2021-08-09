@@ -9,7 +9,7 @@ const getById = id => {
 }
 
 const create = account => {
-  // DO YOUR MAGIC
+  return db('accounts').insert()
 }
 
 const updateById = (id, account) => {
