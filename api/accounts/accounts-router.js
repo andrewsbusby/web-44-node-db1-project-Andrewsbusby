@@ -3,14 +3,14 @@ const md = require('./accounts-middleware');
 
 router.get('/', (req, res, next) => {
   try {
-    r res.json('get accounts')
+    res.json('get accounts')
   }
   catch(err){
     next(err)
   }
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', md.checkAccountId, (req, res, next) => {
   try {
     res.json('get accounts by id')
   }
@@ -19,7 +19,9 @@ router.get('/:id', (req, res, next) => {
   }
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', md.checkAccountPayload,
+ md.checkAccountNameUnique,
+  (req, res, next) => {
   try {
     res.json('new account')
   }
@@ -28,7 +30,10 @@ router.post('/', (req, res, next) => {
   }
 })
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', md.checkAccountId, 
+md.checkAccountPayload,
+md.checkAccountNameUnique,
+ (req, res, next) => {
   try {
     res.json('update account')
   }
@@ -37,7 +42,7 @@ router.put('/:id', (req, res, next) => {
   }
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', md.checkAccountId, (req, res, next) => {
   try {
     res.json('delete account')
   }
